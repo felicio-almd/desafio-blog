@@ -7,13 +7,15 @@
         </div>
     <% end %>
     <div>
-        <%= form.label :title%>
+        <%= form.label :titulo%>
         <%= form.text_field :title%>
     </div>
     <div>
-        <%= form.label :body%>
+        <%= form.label :descrição%>
         <%= form.text_area :body%>
     </div>
 
     <%= form.button %>
+    <br>
+    <%= link_to "Voltar à página inicial", root_path%>
 <% end %>

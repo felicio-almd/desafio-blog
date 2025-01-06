@@ -1,2 +1,8 @@
 <h1><%= @blog_post.title %> </h1>
 <%= @blog_post.body %>
+<br>
+<%= link_to "Editar", edit_blog_post_path(@blog_post) if user_signed_in? %>
+<%= button_to "Deletar", @blog_post, method: :delete, data: {turbo_confirm: "Deseja deletar a postagem?"} %>
+<br>
+<br>
+<%= link_to "Voltar à página inicial", root_path%>
