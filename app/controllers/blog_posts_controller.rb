@@ -9,7 +9,8 @@ class BlogPostsController < ApplicationController
   end
 
   def show
-  end
+    @comments = @blog_post.comments.order(created_at: :desc)
+  end  
 
   def new
     @blog_post = BlogPost.new
@@ -42,7 +43,7 @@ class BlogPostsController < ApplicationController
     else
       redirect_to blog_posts_path, alert: 'Falha ao deletar o post.'
     end
-  end
+  end 
 
   private
 
