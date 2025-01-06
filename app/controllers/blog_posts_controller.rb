@@ -3,7 +3,9 @@ class BlogPostsController < ApplicationController
   before_action :set_blog_post, only: [:edit, :update, :show, :destroy]
   
   def index
-    @blog_posts = BlogPost.all
+    @pagy, @blog_posts = pagy(BlogPost.order(created_at: :desc), items: 3)
+  rescue Pagy::OverflowError
+    redirect_to root_path(page: 1)
   end
 
   def show

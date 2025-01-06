@@ -1,0 +1,1 @@
+Pagy::DEFAULT[:limit] = 3 # items per page

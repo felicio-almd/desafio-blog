@@ -74,3 +74,5 @@ end
 gem "devise"
 
 gem "tailwindcss-rails", "~> 3.1"
+
+gem "pagy"
