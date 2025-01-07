@@ -33,3 +33,17 @@ services:
     plan: free
     maxmemoryPolicy: allkeys-lru
     ipAllowList: []
+
+- type: worker
+    name: desafio-blog
+    env: ruby
+    region: ohio
+    buildCommand: bundle install
+    startCommand: bundle exec sidekiq -C config/sidekiq.yml
+    autoDeploy: false
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: sidekiq-redis
+          property: connectionString
