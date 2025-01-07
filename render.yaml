@@ -1,0 +1,56 @@
+# render.yaml
+services:
+  - type: web
+    name: desafio-blog
+    env: ruby
+    region: ohio
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: desafio-blog-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: desafio-blog
+          property: connectionString
+    healthCheckPath: /
+    autoDeploy: true
+
+  - type: worker
+    name: desafio-blog-worker
+    env: ruby
+    region: ohio
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec sidekiq"
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: desafio-blog-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: desafio-blog
+          property: connectionString
+
+databases:
+  - name: desafio-blog-db
+    region: ohio
+    plan: free
+    
+services:
+  - type: redis
+    name: desafio-blog
+    region: ohio
+    plan: free
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList: []
