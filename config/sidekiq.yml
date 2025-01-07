@@ -1,5 +1,8 @@
 :concurrency: 10
 :queues:
   - default
+  - file_processing
+production:
+  :concurrency: 5
 :redis:
   url: <%= ENV.fetch("REDIS_URL") %>
