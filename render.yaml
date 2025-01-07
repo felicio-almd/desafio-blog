@@ -21,12 +21,6 @@ services:
     healthCheckPath: /
     autoDeploy: true
 
-databases:
-  - name: desafio-blog
-    region: ohio
-    plan: free
-
-services:
   - type: redis
     name: desafio-blog
     region: ohio
@@ -35,7 +29,7 @@ services:
     ipAllowList: []
 
   - type: worker
-    name: desafio-blog
+    name: desafio-blog-worker
     env: ruby
     region: ohio
     buildCommand: bundle install
@@ -47,3 +41,8 @@ services:
           type: redis
           name: desafio-blog
           property: connectionString
+
+databases:
+  - name: desafio-blog
+    region: ohio
+    plan: free
