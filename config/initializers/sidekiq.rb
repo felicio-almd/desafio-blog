@@ -1,4 +1,5 @@
-redis_url = ENV.fetch('REDIS_URL')
+redis_url = ENV.fetch('REDIS_URL', 'redis://localhost:6379/0')
+
 REDIS_CONFIG = {
   url: redis_url,
   ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }

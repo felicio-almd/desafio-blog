@@ -1,11 +1,11 @@
-<h1 class="text-3xl font-bold text-gray-800 mb-6">Blog</h1>
+<h1 class="text-3xl font-bold text-gray-800 mb-6">POSTS</h1>
 
 <% if @blog_posts.any? %>
   <div class="space-y-6">
     <% @blog_posts.each do |blog_post| %>
       <article class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
         <header class="mb-4">
-          <h2 class="text-xl font-semibold text-blue-600 hover:text-blue-800">
+          <h2 class="text-xl font-semibold text-blue-600 hover:text-blue-800 mt-1">
             <%= link_to blog_post.title, blog_post %>
           </h2>
         </header>
@@ -15,15 +15,15 @@
           </p>
         <% end %>
         <footer class="text-sm text-gray-500">
-          Posted on: <%= blog_post.created_at.strftime("%B %d, %Y") %>
+          Postado em: <%= blog_post.created_at.strftime("%d de %B, %Y") %>
         </footer>
       </article>
     <% end %>
   </div>
 
-  <div class="mt-6">
+  <div class="mt-6 flex gap-2 items-center justify-center">
     <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
   </div>
 <% else %>
-  <p class="text-gray-600">No blog posts available at the moment. Please check back later.</p>
+  <p class="text-gray-600">Não há posts no blog disponíveis no momento. Por favor, volte mais tarde.</p>
 <% end %>

@@ -81,3 +81,10 @@ gem 'sidekiq'
 gem 'bigdecimal'
 gem 'mutex_m'
 gem 'redis'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 6.0'
+end
+gem 'factory_bot_rails'
+
+

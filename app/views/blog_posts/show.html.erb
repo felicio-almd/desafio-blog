@@ -1,34 +1,57 @@
-<h1><%= @blog_post.title %> </h1>
-<%= @blog_post.body %>
-<br>
-<%= link_to "Editar", edit_blog_post_path(@blog_post) if user_signed_in? %>
-<%= button_to "Deletar", @blog_post, method: :delete, data: {turbo_confirm: "Deseja deletar a postagem?"} %>
-<br>
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-gray-900 mb-4"><%= @blog_post.title %></h1>
+  
+  <div class="prose prose-lg max-w-none mb-8">
+    <%= @blog_post.body %>
+  </div>
 
-<div class="mt-8">
-  <h2 class="text-2xl font-bold mb-4">Comentários</h2>
+  <div class="flex gap-4 mb-8">
+    <% if user_signed_in? %>
+      <%= link_to "Editar", edit_blog_post_path(@blog_post), 
+          class: "inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors" %>
+      <%= button_to "Deletar", @blog_post, 
+          method: :delete, 
+          data: {turbo_confirm: "Deseja deletar a postagem?"}, 
+          class: "inline-flex items-center px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors" %>
+    <% end %>
+  </div>
 
-  <div class="space-y-4 mb-6">
-    <% @blog_post.comments.order(created_at: :desc).each do |comment| %>
-      <div class="bg-gray-50 p-4 rounded-lg">
-        <p class="text-gray-700"><%= comment.body %></p>
-        <p class="text-sm text-gray-500 mt-2">
-          Por <%= comment.user ? comment.user.email : "Anônimo" %> - <%= comment.created_at.strftime("%d/%m/%Y %H:%M") %>
-        </p>
+  <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6">Comentários</h2>
+
+    <div class="space-y-6 mb-8">
+      <% @blog_post.comments.order(created_at: :desc).each do |comment| %>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
+          <p class="text-gray-700 mb-3"><%= comment.body %></p>
+          <div class="flex items-center text-sm text-gray-500">
+            <span class="font-medium"><%= comment.user ? comment.user.email : "Anônimo" %></span>
+            <span class="mx-2">•</span>
+            <time><%= comment.created_at.strftime("%d/%m/%Y %H:%M") %></time>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= form_with(model: [@blog_post, Comment.new], local: true, class: "bg-gray-50 p-6 rounded-lg") do |f| %>
+      <div class="mb-4">
+        <%= f.label :body, "Adicionar comentário", class: "block text-gray-700 font-medium mb-2" %>
+        <%= f.text_area :body, 
+            class: "w-full p-3 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors", 
+            rows: 3,
+            placeholder: "Escreva seu comentário aqui..." %>
+      </div>
+      <div>
+        <%= f.submit "Enviar comentário", 
+            class: "px-6 py-2 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 transition-colors" %>
       </div>
     <% end %>
   </div>
 
-  <%= form_with(model: [@blog_post, Comment.new], local: true) do |f| %>
-    <div class="mb-4">
-      <%= f.label :body, "Comentário", class: "block text-gray-700 font-medium" %>
-      <%= f.text_area :body, class: "w-full p-2 border rounded", rows: 3 %>
-    </div>
-    <div>
-      <%= f.submit "Enviar", class: "bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" %>
-    </div>
+  <%= link_to root_path, 
+      class: "inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors" do %>
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+    </svg>
+    Voltar à página inicial
   <% end %>
-
-
-<br>
-<%= link_to "Voltar à página inicial", root_path%>
+</div>

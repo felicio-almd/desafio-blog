@@ -12,30 +12,31 @@
   </head>
 
   <body class="mb-16">
+    <div class="flex w-full justify-between mb-6 bg-slate-400 p-6">
+      <%= link_to root_path do %>
+        <h1 class="cursor-pointer text-2xl font-bold">Rubys Blogs</h1>
+      <% end %>
+      <% if user_signed_in? %>
+        <div class="flex gap-4">
+          <%= link_to "Novo Post", new_blog_post_path, class: "text-green-500 hover:text-green-700 text-3xl text-xl border px-2 rounded bg-white" %>
+          <%= link_to "Upload em Massa", new_upload_path, class: "text-blue-600 hover:text-blue-800 text-xl border px-2 rounded bg-white" if user_signed_in? %>
+          <%= link_to "Perfil", edit_user_registration_path, class: "text-blue-500 hover:text-blue-700 text-xl border px-2 rounded bg-white" %>
+          <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "text-red-500 hover:text-red-700 text-xl border px-2 rounded bg-white" %>
+        </div>
+      <% else %>
+        <div class="flex gap-4">
+          <%= link_to "Login", new_user_session_path, class: "text-blue-500 hover:text-blue-700 text-xl border px-2 rounded bg-white" %>
+          <%= link_to "Cadastrar", new_user_registration_path, class: "text-green-500 hover:text-green-700 text-xl border px-2 rounded bg-white" %>
+        </div>
+      <% end %>
+    </div>
+
     <div class="">
       <p class="text-sm text-green-600"><%= notice %></p>
       <p class="text-sm text-red-600"><%= alert %></p>
     </div>
-
-    <div class="flex w-full justify-between mb-6 bg-slate-400 p-6">
-      <%= link_to root_path do %>
-        <h1 class="cursor-pointer">Rubys Blogs</h1>
-      <% end %>
-      <% if user_signed_in? %>
-        <div class="flex gap-4">
-          <%= link_to "Perfil", edit_user_registration_path, class: "text-blue-500 hover:text-blue-700" %>
-          <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "text-red-500 hover:text-red-700" %>
-          <%= link_to "Novo Post", new_blog_post_path, class: "text-green-500 hover:text-green-700" %>
-        </div>
-      <% else %>
-        <div class="flex gap-4">
-          <%= link_to "Login", new_user_session_path, class: "text-blue-500 hover:text-blue-700" %>
-          <%= link_to "Cadastrar", new_user_registration_path, class: "text-green-500 hover:text-green-700" %>
-        </div>
-      <% end %>
-    </div>
+    
     <div class="prose mx-auto">
-      <%= link_to "Upload em Massa", new_upload_path, class: "text-blue-600 hover:text-blue-800" if user_signed_in? %>
       <%= yield %>
     </div>
   </body>
