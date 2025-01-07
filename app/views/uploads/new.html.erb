@@ -1,0 +1,30 @@
+<div class="max-w-2xl mx-auto mt-8">
+  <h1 class="text-2xl font-bold mb-4">Upload de Posts em Massa</h1>
+
+  <div class="bg-white p-6 rounded-lg shadow">
+    <p class="mb-4 text-gray-600">
+      Faça upload de um arquivo TXT com posts no formato:
+      <br>
+      <code class="bg-gray-100 p-1 rounded">Título do Post|Conteúdo do Post</code>
+    </p>
+
+    <%= form_with(url: uploads_path, multipart: true, local: true) do |f| %>
+      <div class="mb-4">
+        <%= f.label :file, "Arquivo TXT", class: "block text-gray-700 font-medium mb-2" %>
+        <%= f.file_field :file, accept: '.txt', class: "w-full p-2 border rounded" %>
+      </div>
+
+      <%= f.submit "Enviar", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+    <% end %>
+  </div>
+
+  <div class="mt-4">
+    <p class="text-sm text-gray-600">
+      * O arquivo deve estar no formato TXT
+      <br>
+      * Cada linha deve conter um post no formato: Título|Conteúdo
+      <br>
+      * Os posts serão processados em segundo plano
+    </p>
+  </div>
+</div>
