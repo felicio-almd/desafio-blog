@@ -76,3 +76,8 @@ gem "devise"
 gem "tailwindcss-rails", "~> 3.1"
 
 gem "pagy"
+gem 'rails-i18n'
+gem 'sidekiq'
+gem 'bigdecimal'
+gem 'mutex_m'
+gem 'redis'
