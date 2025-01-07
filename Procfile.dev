@@ -1,4 +1,4 @@
-web: bin/rails server -b 0.0.0.0 -p $PORT
+web: bundle exec rails server -p $PORT & bundle exec sidekiq
 css: bin/rails tailwindcss:watch
 worker: bundle exec sidekiq -C config/sidekiq.yml
 css: bin/rails tailwindcss:build
