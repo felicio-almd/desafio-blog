@@ -5,7 +5,7 @@ services:
     region: ohio
     plan: free
     buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-production} & (sleep 10 && bundle exec sidekiq -d -L sidekiq.log -e production -C config/sidekiq.yml)"
+    startCommand: "./bin/render-start.sh"
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false
