@@ -17,6 +17,5 @@ bundle exec rake assets:precompile
 # Run database migrations (não incluímos db:create porque o Render já cria o banco)
 bundle exec rake db:migrate
 
-bundle exec sidekiq -d -L sidekiq.log -e production
 # Rode as seeds apenas se necessário (descomente se precisar)
 # bundle exec rails db:seed
