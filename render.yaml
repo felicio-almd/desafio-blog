@@ -25,7 +25,7 @@ databases:
   - name: desafio-blog
     region: ohio
     plan: free
-    
+
 services:
   - type: redis
     name: desafio-blog
@@ -34,7 +34,7 @@ services:
     maxmemoryPolicy: allkeys-lru
     ipAllowList: []
 
-- type: worker
+  - type: worker
     name: desafio-blog
     env: ruby
     region: ohio
@@ -45,5 +45,5 @@ services:
       - key: REDIS_URL
         fromService:
           type: redis
-          name: sidekiq-redis
+          name: desafio-blog
           property: connectionString
