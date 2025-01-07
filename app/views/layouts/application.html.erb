@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <title>Desafio Blog</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -11,22 +11,31 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="prose mx-auto mb-16">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <body class="mb-16">
+    <div class="">
+      <p class="text-sm text-green-600"><%= notice %></p>
+      <p class="text-sm text-red-600"><%= alert %></p>
+    </div>
 
-    <div>
+    <div class="flex w-full justify-between mb-6 bg-slate-400 p-6">
+      <h1>Rubys Blogs</h1>
       <% if user_signed_in? %>
-        <%= link_to "Perfil", edit_user_registration_path %>
-        <%= button_to "Sair", destroy_user_session_path, method: :delete %>
-        <br>
-        <%= link_to "Novo Post", new_blog_post_path %>
+        <div class="flex gap-4">
+          <%= link_to "Perfil", edit_user_registration_path, class: "text-blue-500 hover:text-blue-700" %>
+          <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "text-red-500 hover:text-red-700" %>
+          <%= link_to "Novo Post", new_blog_post_path, class: "text-green-500 hover:text-green-700" %>
+        </div>
       <% else %>
-        <%= link_to "Login", new_user_session_path %>
-        <%= link_to "Cadastrar", new_user_registration_path %>
+        <div class="flex gap-4">
+          <%= link_to "Login", new_user_session_path, class: "text-blue-500 hover:text-blue-700" %>
+          <%= link_to "Cadastrar", new_user_registration_path, class: "text-green-500 hover:text-green-700" %>
+        </div>
       <% end %>
     </div>
-    
-    <%= yield %>
+    <div class="prose mx-auto">
+      <%= link_to "Upload em Massa", new_upload_path, class: "text-blue-600 hover:text-blue-800" if user_signed_in? %>
+      <%= yield %>
+    </div>
   </body>
+
 </html>
