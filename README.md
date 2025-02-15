@@ -16,6 +16,8 @@ Aplicação full-stack desenvolvida com Ruby On Rails para gerenciamento de um b
 ## :sparkles: Features
 - Personalização do layout utilizando Tailwind.
 - Gem para paginação dos posts.
+- Upload de posts em massa com txt
+- Comentarios logados e anonimos em cada post
 - Validações específicas no CRUD.
 - Especificação de níveis de acesso de usuário no backend.
 - Utilização do PostgreSQL e Docker para criação da imagem e uso dos volumes.
